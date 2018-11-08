@@ -1,0 +1,65 @@
+@model TiendaMarvel.Models.ProductoEditarModel
+@inject ICategoriasRepository categorias
+
+@{
+    ViewData["Title"] = "Crear";
+    var cates = await categorias.LeerTodas();
+    var cats = new List<string>();
+    foreach (var item in cates)
+    {
+        cats.Add(item.Descripcion);
+    }
+}
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<link rel="stylesheet" href="~/css/Ticket.css" />
+<h2>Editar</h2>
+
+<h4>Editor de productos</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="id" class="control-label"></label>
+                @Model.id
+                <span asp-validation-for="id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Precio" class="control-label"></label>
+                <input asp-for="Precio" class="form-control" />
+                <span asp-validation-for="Precio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descripcion" class="control-label"></label>
+                <input asp-for="Descripcion" class="form-control" />
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                    <label asp-for="Categoria" class="control-label"></label>
+                    <select asp-for="Categoria"
+                        asp-items="@(new SelectList(cats))"
+                        class="form-control">
+                            <option></option>
+                    </select>
+                    <span asp-validation-for="Categoria" class="text-danger"></span>
+                </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

@@ -1,0 +1,139 @@
+@model IEnumerable<TiendaMarvel.Services.PartidaEnCarrito>
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    var a = "";
+    ViewData["Title"] = "ProcesoPago";
+}
+<link rel="stylesheet" href="~/css/ProcesoPago.css" />
+<h2 style="text-align:center;">Instrucciones para el Proceso de Pago</h2>
+<h3 style="text-align:center;color:blue;">
+    Metodos de Pago – Cuentas Bancarias y Pagos en Tiendas OXXO y Seven Eleven
+</h3>
+<br>
+<div id="x">
+<div class="Bancos1">
+    <div id="ImagenBanco">
+        <img src="http://www.plazalilas.com.mx/nueva/wp-content/uploads/2015/08/banorte_lilas-780x340.jpg">
+    </div>
+    <div id="InformacionBanco">
+        BANORTE (Depósitos en Efectivo y Transferencias) <br>
+        Cuenta: 0353113598 <br>
+        Clabe: 072 135 00353113598 8 <br>
+        A: <span style="color:brown;">UTILIDADES DIGITALES MX SA DE CV</span>
+    </div>
+</div>
+<br>
+<div class="Bancos2">
+    <div id="ImagenBanco">
+        <img src="https://i2.sdpnoticias.com/sdpnoticias/2016/12/16/1628_bbva-bancomer_620x350.jpg">
+    </div>
+    <div id="InformacionBanco">
+        BANCOMER (Depósitos en efectivo y Transferencias)<br>
+        Cuenta: 0111424165<br>
+        Clabe: 012 320 00111424165 5<br>
+        A: <span style="color:brown;">UTILIDADES DIGITALES MX SA DE CV</span>
+    </div>
+</div></div>
+
+
+<h2>
+    TAMBIEN PUEDES DEPOSITAR EN TODAS LAS TIENDAS OXXO o SEVEN:
+</h2>
+<span>
+    Para pagos en OXXO o SEVEN solo deben dirigirse con el Cajero y darle los 16 dígitos que se le darán al finalizar el pedido.
+</span>
+<br>
+
+<div class="Bancos1">
+    <div id="ImagenBanco">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/66/Oxxo_Logo.svg">
+    </div>
+    <div id="InformacionBanco">
+        <span style="color:brown;">Datos para Depositar en cualquier Tienda OXXO</span><br>
+        4189-2810-4332-7726 (Puedes depositar también directo en Banorte) 
+    </div>
+</div> <br>
+<div class="Bancos1">
+    <div id="ImagenBanco">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Seven_eleven_logo.svg">
+    </div>
+    <div id="InformacionBanco">
+        <span style="color:brown;">Datos para Depositar en cualquier Tienda Seven Eleven</span><br>
+        4189-2810-4332-7726 (Puedes depositar también directo en Banorte)
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<span>
+    *Se recomienda hacer el depósito antes de las 8 PM para que se vea reflejado el mismo día. Si el cajero del OXXO o Seven les menciona que no se puede realizar el deposito es porque se superaron el numero de movimientos del mes, con los mismos numeros de tarjeta se puede ir al banco que corresponda y depositar el importe de la compra.
+</span><br>
+<h4>
+    Registro Federal de Contribuyentes (RFC) de UTILIDADES DIGITALES MX SA DE CV: UDM-171121-L71
+</h4>
+<br>
+<br>
+<br>
+<h2>
+    ¿Qué hacer después de realizar el depósito?
+</h2>
+<br>
+<br>
+<span>
+    Una vez realizado el pago, favor de enviar su comprobante de pago (escaneado, foto, PDF generado de la transferencia, etc) (No aplica para pagos vía PAYPAL y Tarjeta de Crédito/Debito)  mencionando el producto que desea adquirir al correo servicios@contadormx.net, En caso de necesitar factura, anexar sus datos fiscales (RFC, Razón social, Uso del CFDi y Correo electrónico).<br><br>
+
+Una vez que recibimos el comprobante de pago, el tiempo de respuesta con instrucciones para la activación de su compra es en un lapso de 1 a 2 horas aproximadamente.<br><br>
+
+La factura se le hará llegar al correo electrónico proporcionado en un lapso de 24 a 48 horas hábiles. Gracias por su amable tiempo de espera.
+</span>
+<br>
+<br>
+@{
+    var id = "P";
+    Random rnd = new Random();
+    int r = rnd.Next(10, 9999);
+    id += r;
+}
+@{
+    var json = @Html.Raw(Json.Serialize(@Model));
+    string jj = json+"";
+
+}
+<div style="text-align:right;font-size:1.5em;color:blue;">
+    <a  onclick="pedido('@id','@jj','@UserManager.GetUserName(User)','@UserManager.GetUserName(User)')">Finalizar Pedido</a>
+</div>
+
+<script type="text/javascript">
+    function pedido(id,productos,cliente, correo) {
+        var dt = new Date();
+        var fecha = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+        $.ajax({
+            url: "../api/Pedidos",
+            type: "POST",
+            contentType: "application/json",
+            data: "{'PedidoId':'"+id+"','Cliente':'"+cliente+"','CorreoElectronico':'"+correo+"','FechaPedido':'"+fecha+"','Productos':'"+productos+"'}",
+            success: function(data){
+                window.location.replace("/Carrito/Ticket");
+            },
+            error: function(xhr, status){
+                alert({"msg":"hubo un error",
+                        "err":status,
+                        "xhr":xhr});
+            }
+        });
+    }
+</script>
+<script>
+    function alett(mensaje) {
+        // alert('You clicked '+ mensaje +"!");
+        console.log(mensaje);
+    }
+</script>
+<script type="text/javascript">
+    (function () {
+      var String = "@Html.Raw(a)";
+      console.log(String);
+})();
+</script>

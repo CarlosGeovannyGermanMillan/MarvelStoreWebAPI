@@ -1,0 +1,124 @@
+@model IEnumerable<TiendaMarvel.Services.PartidaEnCarrito>
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+    <link rel="stylesheet" href="~/css/Carrito.css" />
+@{
+    ViewData["Title"] = "Index";
+    var cant = new List<int>();
+    for(int i=0;i<= 10; i++){
+        cant.Add(i);
+    }
+
+    int regresaVal(int val){
+        return val;
+    }
+    decimal SubTot=0;
+    decimal Tot = 0;
+    decimal Imp = 0;
+
+}
+@functions{
+    
+    public decimal Multiplicar(decimal a, decimal b){
+        return a*b;
+    }
+    public decimal Suma(decimal a , decimal b, decimal c){  
+        return c + a * b;
+    }
+    public decimal Impuesto(decimal a, decimal b){
+        return a - b;
+    }
+}
+
+<h2 style="text-align:center;">Articulos del Pedido</h2>
+
+<p style="display:inline;margin:5"> 
+    <form asp-action="Vaciar" asp-controller="Carrito">
+        <input type="submit" class="btn btn-primary" role="button" value="Vaciar"   style="float:left"/>
+    </form>
+    <form asp-action="Resumen" asp-controller="Carrito">
+        <input type="submit" class="btn btn-primary" role="button" value="Pagar"  style="float:left;margin-left:6px;"/>
+    </form>
+    
+    
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Codigo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Descripcion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Precio)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cantidad)
+                </th>
+                <th>
+                    Total
+                </th>
+                <th>
+                    
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Codigo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td id id="@item.Precio+@item.Codigo">
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            
+            <td>
+                <form asp-action="Agregar" asp-controller="Carrito" style="color:black;">
+                    <select id="@item.Cantidad+@item.Codigo" onchange="alert(value)"
+                            asp-items="@(new SelectList(cant))">
+                            <option selected="selected" value=@item.Cantidad>@item.Cantidad</option>
+                            <option></option>
+                    </select>
+                </form>
+            </td>
+            <td>   
+                @Multiplicar(item.Precio,item.Cantidad)
+            </td>
+            
+            <td>
+                <form asp-action="Quitar" asp-controller="Carrito">
+                        <input type="hidden" name="Codigo" value= "@item.Codigo" />
+                        
+                        <input type="submit" class="btn btn-primary" role="button" value="Quitar" 
+                        SubTot = @Suma(item.Precio, item.Cantidad, Tot);
+                        Tot = @Suma(item.PrecioImpuesto, item.Cantidad, Tot);
+                        Imp = @Impuesto(Tot,SubTot);/>
+                </form>
+            </td>
+        </tr>
+        
+        SubTot = @Suma(item.Precio, item.Cantidad, SubTot);
+        Tot = @Suma(item.PrecioImpuesto, item.Cantidad, Tot);
+        Imp = @Impuesto(Tot,SubTot);
+}
+    </tbody>
+</table>
+<h3 style="text-align: right; padding-right: 20px;">
+    Sub Total = $ @SubTot <br>
+    Impuesto = $ @Imp<br>
+    Total = $ @Tot
+</h3>

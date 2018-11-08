@@ -1,0 +1,16 @@
+body, html {
+    height: 100%;
+    font-size: 15px;
+    background: url(https://images2.alphacoders.com/496/496091.jpg);
+    font-weight: bold;
+}
+
+#ImagenCodigo{
+    vertical-align: top;
+    width: 40%;
+    display: inline-block;
+}
+#Informacion{
+    width: 40%;
+    display: inline-block;
+}

@@ -1,0 +1,66 @@
+@model IEnumerable<TiendaMarvel.Models.PedidoModel>
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ViewData["Title"] = "IndexCliente";
+}
+@{
+    var id = "P";
+    Random rnd = new Random();
+    int r = rnd.Next(10, 9999);
+    id += r;
+}
+<link rel="stylesheet" href="~/css/Carrito.css" />
+
+<h2>Pedidos Actuales</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    Identificador
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaPedido)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Estado)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Referencia)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PedidoId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaPedido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Referencia)
+            </td>
+            <td>
+                @if(item.Estado == "No Pagado" && item.Estado != "Cancelado"){
+                    @Html.ActionLink("Agregar Folio", "ActualizarReferencia", new { id = item.PedidoId, Estado = "Sin Verificar" , Referencia = id}) 
+                } |
+                @if(item.Estado == "No Pagado" && item.Estado != "Cancelado"){
+                    @Html.ActionLink("Cancelar", "ActualizarCliente", new { id=item.PedidoId, Estado = "Cancelado" })
+                } 
+
+
+            </td>
+            
+        </tr>
+}
+    </tbody>
+</table>
+
+

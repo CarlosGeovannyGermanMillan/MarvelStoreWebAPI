@@ -1,0 +1,68 @@
+@model IEnumerable<TiendaMarvel.Models.PedidoModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<link rel="stylesheet" href="~/css/Carrito.css" />
+
+<h2>Administrador de Pedidos</h2>
+
+
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    Identificador
+                </th>
+                <th>
+                    Cliente
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaPedido)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Estado)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Referencia)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PedidoId)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.CorreoElectronico)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaPedido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Referencia)
+            </td>
+            <td>
+                @if(item.Estado == "Sin Verificar"){
+                    @Html.ActionLink("Pagado", "Actualizar", new { id = item.PedidoId, Estado = "Pagado" })
+                }
+                @if(item.Estado == "Pagado"){
+                    @Html.ActionLink("Enviar", "Actualizar", new { id = item.PedidoId, Estado = "Enviado" })
+                }
+                @if(item.Estado == "Enviado"){
+                    <text>Enviado</text>
+                }|
+                @if(item.Estado == "No Pagado"){
+                    @Html.ActionLink("Cancelar", "Actualizar", new { id=item.PedidoId, Estado = "Cancelado" })
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

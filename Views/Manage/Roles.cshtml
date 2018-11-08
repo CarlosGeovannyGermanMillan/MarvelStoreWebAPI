@@ -1,0 +1,49 @@
+
+   @* @model TiendaMarvel.Models.ManageViewModels.CambiarRolViewModel
+
+    @{
+        ViewData["Title"] = "Roles";
+    }
+
+    <h2>Roles</h2>
+
+    <h4>CambiarRolViewModel</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Roles">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Username" class="control-label"></label>
+                    <input asp-for="Username" class="form-control" />
+                    @Model.Username
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    @Model.Email
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Roles" class="control-label"></label>
+                    <select asp-for="Roles"
+                        asp-items="@(new SelectList(Model.RolesDisponibles))"
+                        class="form-control">
+                            <option></option>
+                    </select>
+                    <span asp-validation-for="Roles" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="hidden" asp-for="UserName"/>
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Usuarios">Back to List</a>
+    </div>
+
+    *@

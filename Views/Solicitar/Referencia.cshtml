@@ -1,0 +1,23 @@
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ViewData["Title"] = "Referencia";
+}
+<link rel="stylesheet" href="~/css/CarritoAdmini.css" />
+<h2 style="text-align:center;">Referencia</h2>
+<br>
+<h3>
+    Ingrese el Folio del pago en el Banco:
+</h3>
+
+<input style="color:black;"
+        id="Referencia" 
+        name="Referencias" 
+        placeholder="Ingrese el Folio"
+        type="text" 
+        value="" /><br><br>
+<form asp-action="IndexCliente" asp-controller="Solicitar">
+             <input type="submit" class="btn btn-primary" role="button" value="Enviar Folio"  style="float:left;margin-left:6px;"/>
+        </form>
+
+

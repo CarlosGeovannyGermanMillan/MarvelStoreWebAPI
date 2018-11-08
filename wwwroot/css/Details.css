@@ -1,0 +1,27 @@
+body, html {
+    height: 100%;
+    background: url(https://i.imgur.com/9xOTFb1.jpg);
+    font-size: 15px;
+    color: black;
+}
+#informacion{
+    background: #FAFAFA;  
+    border-radius: 20px;
+}
+#derecho{
+    display: inline-block;
+    width: 45%;
+}
+
+#imagen{
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+}
+
+#imagen img{
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+    height: 50%;
+}

@@ -1,0 +1,41 @@
+@model IEnumerable<TiendaMarvel.Models.CategoriaModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+    <link rel="stylesheet" href="~/css/CarritoAdmini.css" />
+
+<h2>Administrador de Categorias</h2>
+
+<p>
+    <a asp-action="Create">Crear Nueva Categoria</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CategoriaCodigo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Descripcion)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoriaCodigo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.CategoriaCodigo }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.CategoriaCodigo })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

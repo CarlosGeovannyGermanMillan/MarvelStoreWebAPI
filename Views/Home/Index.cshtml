@@ -1,0 +1,86 @@
+﻿
+@model IEnumerable<TiendaMarvel.Models.ProductoEntity>
+@{
+    ViewData["Title"] = "Home Page";
+}
+<link rel="stylesheet" href="~/css/index.css" />
+
+ <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="https://img00.deviantart.net/353f/i/2013/115/f/3/iron_man_wallpaper_by_crost92-d631i9w.jpg">
+                </div>
+
+                <div class="item">
+                    <img src="https://i.imgur.com/G53uO2n.png">
+                </div>
+
+                <div class="item">
+                    <img src="http://wallpaper-gallery.net/images/marvel-comics-hd-wallpaper/marvel-comics-hd-wallpaper-8.jpg">
+                </div>
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+    <h2>Productos</h2>
+<div class="row">
+    <ul>
+        @foreach(var p in Model){
+            <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+            
+            @if(!string.IsNullOrWhiteSpace(p.ImagenURL)){
+                <a asp-controller="Catalogo" asp-action="Details" asp-route-id="@p.Codigo"  class="thumbnail">
+                    
+                        <img class="imagenesMarvel" src="@p.ImagenURL" alt="@p.Codigo" style="height:300px;width:100%;"/>
+                    
+                </a>                   
+            }
+            
+            <div class="caption">
+                <h3>@p.Nombre</h3>
+                <h3>$@p.Precio</h3>
+                <p>
+                    <form asp-action="Agregar" asp-controller="Carrito">
+                        <input type="hidden" name="Codigo" value= "@p.Codigo" />
+                        <input class="nombre" type="hidden" name="Nombre" value= "@p.Nombre" />
+                        <input type="hidden" name="Cantidad" value= "1" />
+                        <input type="hidden" name="Precio" value= "@p.Precio" />
+                        <input type="hidden" name="PrecioImpuesto" value= "@p.PrecioImpuesto" />
+                        <input type="hidden" name="Descripcion" value= "@p.Descripcion" />
+                        <input type="submit" class="btn btn-primary" role="button" value="Agregar" />
+                    </form>
+                    
+                    <!-- <a href="#" class="btn btn-primary" role="button">Agregar</a>  -->
+                    
+                </p>
+            </div>
+            </div>
+            </div>
+        }
+    </ul>
+</div>
+<footer id="pies">
+         <img class="" src="https://seeklogo.com/images/C/Captain_America-logo-8F6417E732-seeklogo.com.png" width="100" height="100"/>
+         <img class="" src="http://1.bp.blogspot.com/-Z3aqowKPRLQ/VniCeq3oVjI/AAAAAAAABGU/fTxOduG3XAc/s1600/02.png" width="100" height="100"/>
+         <img class="" src="https://1.bp.blogspot.com/-cIkGw-IEZoQ/UwomnJTaDJI/AAAAAAACSgo/yQjcSXZpGxA/s1600/escudo-super-heroe-spiderman2.png" width="100" height="100"/>
+         <img class="" src="https://pre00.deviantart.net/eb7c/th/pre/i/2013/359/a/4/deadpool_logo_1_fill_by_mr_droy-d5q6y5u.png" width="100" height="100"/>  
+</footer>
+

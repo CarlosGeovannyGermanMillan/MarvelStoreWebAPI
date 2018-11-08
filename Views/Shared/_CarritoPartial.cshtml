@@ -1,0 +1,14 @@
+@inject TiendaMarvel.Services.CarritoService carritoService
+<ul class="nav navbar-nav navbar-right">
+    <li>
+        <a asp-controller="Carrito" asp-action="Index">
+            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true">
+
+            </span>
+            @if(carritoService.NumeroDePartidas>0){
+            <span class="badge">@carritoService.NumeroDePartidas</span>
+            }
+        </a>
+    </li>
+
+</ul>

@@ -1,0 +1,33 @@
+@model TiendaMarvel.Models.CategoriaModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<link rel="stylesheet" href="~/css/Carrito.css" />
+
+<h2>Eliminar</h2>
+
+<h3>¿Seguro que quiere eliminar esta categoria?</h3>
+<div>
+    <h4>CategoriaModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CategoriaCodigo)
+        </dt>
+        <dd>
+            @Model.CategoriaCodigo
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+        <dd>
+            @Model.Descripcion
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

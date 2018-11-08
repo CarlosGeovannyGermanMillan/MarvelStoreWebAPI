@@ -1,0 +1,25 @@
+body, html {
+    height: 100%;
+    font-size: 15px;
+    color: black;
+}
+
+#ImagenBanco{
+    display: inline-block;
+    width: 45%;
+    height: 30%;
+}
+
+#InformacionBanco{
+    display: inline-block;
+    vertical-align: top;
+    width: 55%;
+}
+
+#ImagenBanco img{
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+    height: 50%;
+}
+

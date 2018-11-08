@@ -1,0 +1,69 @@
+@model IEnumerable<TiendaMarvel.Models.ProductoModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<link rel="stylesheet" href="~/css/Ticket.css" />
+<h1>Catalogo de Productos</h1>
+
+<p>
+    <a asp-action="Create">Crear Nuevo Producto</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.id)
+                </th>
+                <td>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Descripcion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Categoria)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Precio)
+                </th>
+                <th>
+                    Imagen
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categoria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                @if(!string.IsNullOrWhiteSpace(item.Imagen)){
+                    <a asp-controller="Catalogo" asp-action="CambiarImagen" asp-route-id="@item.id"  class="thumbnail">
+                        <img src="@item.Imagen" alt="Articulo Imagen" width=”100” height=”100”/>
+                    </a>                   
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.id}) |
+                <a asp-controller="Catalogo" asp-action="CambiarImagen" asp-route-id="@item.id" >CambiarImagen</a> 
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,19 @@
+body, html {
+    height: 100%;
+    background: url(https://images2.alphacoders.com/496/496091.jpg);
+    background-attachment:fixed;
+    font-size: 15px;
+    color: white;
+}
+
+.TarjetaProducto{
+    height: 600px;
+    min-height: 600px;
+    max-height: 600px;
+
+    width: 400px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+

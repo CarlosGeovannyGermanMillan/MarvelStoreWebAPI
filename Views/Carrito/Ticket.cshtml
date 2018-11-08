@@ -1,0 +1,35 @@
+@model IEnumerable<TiendaMarvel.Services.PartidaEnCarrito>
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ViewData["Title"] = "Ticket";
+}
+<link rel="stylesheet" href="~/css/Ticket.css" />
+<h1 style="text-align:left;color:blue;">¡Gracias por tu compra!</h1><br>
+<h3 style="text-align:left;color:black;">Codigo QR para el proceso de pago</h3><br><br>
+
+<div id="ImagenCodigo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/QRc%C3%B3digo_portada_wikipedia_espa%C3%B1ol.png">
+</div>
+<div id="Informacion">
+        <span style="font-size:1em;">
+            Marvel Store le da las gracias por su preferencia y le hace saber que su pedido a sido procesado.<br><br>
+            Tenga en cuenta que su pedido de la Tienda Marvel Store tiene que ser liquidado en un periodo no mayor a 48 horas.<br><br>
+            El pago debe ser realizado con la siguiente referencia:<br><br>
+            <div style="text-align:center;font-size:1.5em;color:blue;">
+                <span >
+                    @UserManager.GetUserName(User) 
+                </span>
+            </div>
+            <div style="text-align:center;font-size:1.2em;color:black;">
+                <span >
+                    (Favor de Tomar foto o guardar registro de este mensaje)
+                </span>
+            </div>
+
+        </span>
+</div>
+<form asp-action="VaciarPago" asp-controller="Carrito" style="text-align:center;">
+         <input type="submit" class="btn btn-primary" role="button" value="OK" />       
+</form>
+
